@@ -7,10 +7,13 @@
 
 int main()
 {
+	time_t t;
 	dlinkedList_t* dlist = init_dllist();
 
+	srand((unsigned)time(&t));
+
 	for (int i = 0; i < 10; i++) {
-		if (!insert_dllist(dlist, i)) {
+		if (!insert_dllist(dlist, rand() % 50)) {
 			perror("unable to insert into list");
 		}
 	}

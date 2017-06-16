@@ -24,6 +24,33 @@ int insert_dllist(dlinkedList_t* list, int key) {
 	new_node->key = key;
 
 	if (list->last != NULL) {
+		/*******************************************
+		* Insert node immediately in front of the
+		* first node with with a larger key. If
+		* no such node is found, insert node at the
+		* end of the list. -- Sorted by key
+		*******************************************/		
+		node_t* next = list->head;
+		while (next != NULL) {
+			if (next->key >= key) {
+				if (list->head == list->last) {//only one node
+					list->head = new_node;
+				}
+				else if (next->prev != NULL)  { //at least two nodes
+					new_node->prev = next->prev;
+					next->prev->next = new_node;
+				}
+				else { // skip the head if multiple nodes exist
+					;
+				}
+				new_node->next = next;
+				next->prev = new_node;
+				list->size++;
+				return 1;
+			}
+			next = next->next;
+		}
+		/////////////////////////////////////////////////////
 		new_node->prev = list->last;
 		list->last->next = new_node;
 		list->last = new_node;

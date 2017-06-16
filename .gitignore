@@ -5,8 +5,7 @@
 /Debug
 /.vs
 /Algorithms/Debug
-/Algorithms.sln
-*.sln
-/Algorithms.sln
 /Algorithms/x64/Debug
 /x64/Debug
+/Algorithms/Algorithms.vcxproj.user
+
