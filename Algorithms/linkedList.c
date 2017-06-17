@@ -13,7 +13,7 @@ dlinkedList_t* init_dllist(void) {
 	return list;
 }
 
-int insert_dllist(dlinkedList_t* list, int key) {
+int insert_dllist(dlinkedList_t* list, int key, int value) {
 	node_t* new_node = malloc(sizeof(node_t));
 
 	if (new_node == NULL || list == NULL) {
@@ -22,6 +22,7 @@ int insert_dllist(dlinkedList_t* list, int key) {
 	new_node->next = NULL;
 	new_node->prev = NULL;
 	new_node->key = key;
+	new_node->value = value;
 
 	if (list->last != NULL) {
 		/*******************************************
@@ -33,7 +34,7 @@ int insert_dllist(dlinkedList_t* list, int key) {
 		node_t* next = list->head;
 		while (next != NULL) {
 			if (next->key >= key) {
-				if (list->head == list->last) {//only one node
+				if (list->head->key >= key) {//less than head
 					list->head = new_node;
 				}
 				else if (next->prev != NULL)  { //at least two nodes
@@ -84,12 +85,17 @@ int delete_dllist(dlinkedList_t* list, int key) {
 	node_t* node = search_dllist(list, key);
 
 	if (node != NULL) {
-		if (node->prev == NULL) { // head
+		if (node->prev == NULL && (list->head->next != NULL)) { // head with additional nodes
 			list->head = list->head->next;
 			list->head->prev = NULL;
 		}
-		else if (node->next == NULL){ // tail
+		else if (node->next == NULL){ // tail			
 			node->prev->next = NULL;
+			list->last = node->prev;
+		}
+		else if (list->head == list->last) { // only head remaining
+			list->head = NULL;
+			list->last = NULL;
 		}
 		else {
 			node->prev->next = node->next;

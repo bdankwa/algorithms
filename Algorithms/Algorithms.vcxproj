@@ -142,13 +142,16 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="hashTables.h" />
     <ClInclude Include="linkedList.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="algorithms.c" />
+    <ClCompile Include="hashTables.c" />
     <ClCompile Include="linkedList.c" />
+    <ClCompile Include="test_linkedList.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
