@@ -1,5 +1,5 @@
 #include "linkedList.h"
-#include "stdafx.h""
+#include "stdafx.h"
 
 dlinkedList_t* init_dllist(void) {
 
@@ -17,6 +17,7 @@ int insert_dllist(dlinkedList_t* list, int key, int value) {
 	node_t* new_node = malloc(sizeof(node_t));
 
 	if (new_node == NULL || list == NULL) {
+		perror("insert_dllist: null pointer");
 		return 0;
 	}
 	new_node->next = NULL;
@@ -68,6 +69,7 @@ int insert_dllist(dlinkedList_t* list, int key, int value) {
 
 node_t* search_dllist(dlinkedList_t* list, int key) {
 	if (list == NULL || list->head == NULL) {
+		perror("search_dllist: null pointer");
 		return NULL;
 	}
 
@@ -89,13 +91,13 @@ int delete_dllist(dlinkedList_t* list, int key) {
 			list->head = list->head->next;
 			list->head->prev = NULL;
 		}
-		else if (node->next == NULL){ // tail			
-			node->prev->next = NULL;
-			list->last = node->prev;
-		}
 		else if (list->head == list->last) { // only head remaining
 			list->head = NULL;
 			list->last = NULL;
+		}
+		else if (node->next == NULL){ // tail			
+			node->prev->next = NULL;
+			list->last = node->prev;
 		}
 		else {
 			node->prev->next = node->next;

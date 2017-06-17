@@ -5,10 +5,14 @@
 
 typedef struct {
 	dlinkedList_t* map[HASH_SIZE];
+	int curser_index;
+	node_t* curser_node;
 	int size;
-}hastTable_t;
+}hashTable_t;
 
-hastTable_t* init_hashTable(void);
-int insert_hashTable(hastTable_t* hashTable, int key, int value);
-node_t* search_hashTable(hastTable_t* hashTable, int key);
-int delete_hashTable(hastTable_t* hashTable, int key);
+hashTable_t* init_hashTable(void);
+int insert_hashTable(hashTable_t* hashTable, int key, int value);
+node_t* search_hashTable(hashTable_t* hashTable, int key);
+int delete_hashTable(hashTable_t* hashTable, int key);
+void interator_init(hashTable_t* hashTable);
+node_t* iterator_next(hashTable_t* hashTable);
