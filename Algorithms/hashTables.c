@@ -11,6 +11,8 @@ int hash(int key) {
 hashTable_t* init_hashTable(void) {
 
 	hashTable_t* hashTable = malloc(sizeof(hashTable_t));
+	hashTable->map = malloc(HASH_SIZE * sizeof(dlinkedList_t*));
+
 	for (int i = 0; i < HASH_SIZE; i++) {
 		hashTable->map[i] = init_dllist();
 	}
@@ -23,7 +25,15 @@ hashTable_t* init_hashTable(void) {
 
 int insert_hashTable(hashTable_t* hashTable, int key, int value) {
 	if (hashTable != NULL) {
-		//TODO: check for load factor and resize array.
+		//check for 100% load factor and resize array.
+		if ((hashTable->size > 0) && (hashTable->size % HASH_SIZE == 0)) {
+			hashTable->map = realloc(hashTable->map, 2 * new_size * sizeof(dlinkedList_t*));
+			// Initialize newly allocated space
+			for (int i = new_size; i < 2 * new_size; i++) {
+				hashTable->map[i] = init_dllist();
+			}
+			new_size = 2 * new_size;
+		}
 		if (insert_dllist(hashTable->map[hash(key)], key, value)) {
 			hashTable->size++;
 			return 1;

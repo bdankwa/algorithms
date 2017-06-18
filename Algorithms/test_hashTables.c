@@ -15,7 +15,7 @@ void test_hashTable()
 
 	int random;
 
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 15; i++) {
 		random = rand() % 50;
 		printf("Inserting ket %i , value % i\n", i, random);
 		if (!insert_hashTable(hashTable, i, random)) {
@@ -27,7 +27,7 @@ void test_hashTable()
 	int i = 0;
 	node_t* next;
 	printf("Hash Table Size % i\n", hashTable->size);
-	while (i < HASH_SIZE) {
+	while (i < HASH_SIZE + 5) {
 		if ((next = iterator_next(hashTable)) != NULL) {
 			printf("Key %i : Value = %i \n", next->key, next->value);
 		}
@@ -62,7 +62,7 @@ void test_hashTable()
 
 	interator_init(hashTable);
 	i = 0;
-	while (i < HASH_SIZE) {
+	while (i < HASH_SIZE + 5) {
 		if ((next = iterator_next(hashTable)) != NULL) {
 			printf("Key %i : Value = %i \n", next->key, next->value);
 		}
@@ -80,7 +80,7 @@ void test_hashTable()
 
 	interator_init(hashTable);
 	i = 0;
-	while (i < HASH_SIZE) {
+	while (i < HASH_SIZE + 5) {
 		if ((next = iterator_next(hashTable)) != NULL) {
 			printf("Key %i : Value = %i \n", next->key, next->value);
 		}

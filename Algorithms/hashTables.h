@@ -4,7 +4,7 @@
 #define HASH_SIZE 10
 
 typedef struct {
-	dlinkedList_t* map[HASH_SIZE];
+	dlinkedList_t** map; // NOTE: Pointer-to-pointer definition required to be able to implement dynamic re-sizing.
 	int curser_index;
 	node_t* curser_node;
 	int size;
