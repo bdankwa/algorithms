@@ -151,7 +151,8 @@
     <ClCompile Include="algorithms.c" />
     <ClCompile Include="hashTables.c" />
     <ClCompile Include="linkedList.c" />
-    <ClCompile Include="test_hashTables.c" />
+    <ClCompile Include="test_hashTables_chaining.c" />
+    <ClCompile Include="test_hashTable_directAddresing.c" />
     <ClCompile Include="test_linkedList.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

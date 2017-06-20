@@ -44,7 +44,10 @@
     <ClCompile Include="hashTables.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test_hashTables.c">
+    <ClCompile Include="test_hashTables_chaining.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_hashTable_directAddresing.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

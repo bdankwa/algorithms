@@ -1,41 +1,39 @@
-// Algorithms.cpp : Defines the entry point for the console application.
-//
 
 #include "stdafx.h"
 #include "hashTables.h"
 
-void test_hashTable(void);
+void test_DAhashTable(void);
 
-void test_hashTable()
+void test_DAhashTable()
 {
 	time_t t;
-	hashTable_t* hashTable = init_hashTable();
+	DAhashTable_t hashTable = init_DAhashTable();
 
 	srand((unsigned)time(&t));
 
 	int random;
 
-	for (int i = 0; i < 15; i++) {
+	for (int i = 0; i < HASH_SIZE; i++) {
 		random = rand() % 50;
 		printf("Inserting ket %i , value % i\n", i, random);
-		if (!insert_hashTable(hashTable, i, random)) {
+		if (!insert_DAhashTable(&hashTable, i, random)) {
 			perror("unable to insert into hashtable");
 		}
 	}
 
-	interator_init(hashTable);
+	interator_init_DA(&hashTable);
 	int i = 0;
 	node_t* next;
-	printf("Hash Table Size % i\n", hashTable->size);
-	while (i < HASH_SIZE + 5) {
-		if ((next = iterator_next(hashTable)) != NULL) {
+	printf("Hash Table Size % i\n", hashTable.size);
+	while (i < HASH_SIZE) {
+		if ((next = iterator_next_DA(&hashTable)) != NULL) {
 			printf("Key %i : Value = %i \n", next->key, next->value);
 		}
 		i++;
 	}
 
 	int key = 5;
-	node_t* node = search_hashTable(hashTable, key);
+	node_t* node = search_node_DAhashTable(&hashTable, key);
 	if (node != NULL) {
 		printf("found node with key = %i, value = %i \n", node->key, node->value);
 	}
@@ -44,7 +42,7 @@ void test_hashTable()
 	}
 
 	key = 21;
-	node = search_hashTable(hashTable, key);
+	node = search_node_DAhashTable(&hashTable, key);
 	if (node != NULL) {
 		printf("found node with key = %i , value = %i\n", key, node->key);
 	}
@@ -53,17 +51,17 @@ void test_hashTable()
 	}
 
 	key = 5;
-	if (delete_hashTable(hashTable, key)) {
+	if (delete_DAhashTable(&hashTable, key)) {
 		printf("deleted node with key = %i \n", key);
 	}
 	else {
 		printf("Node with key = %i not found \n", key);
 	}
 
-	interator_init(hashTable);
+	interator_init_DA(&hashTable);
 	i = 0;
-	while (i < HASH_SIZE + 5) {
-		if ((next = iterator_next(hashTable)) != NULL) {
+	while (i < hashTable.size) {
+		if ((next = iterator_next_DA(&hashTable)) != NULL) {
 			printf("Key %i : Value = %i \n", next->key, next->value);
 		}
 		i++;
@@ -71,17 +69,17 @@ void test_hashTable()
 
 
 	key = 0;
-	if (delete_hashTable(hashTable, key)) {
+	if (delete_DAhashTable(&hashTable, key)) {
 		printf("deleted node with key = %i \n", key);
 	}
 	else {
 		printf("Node with key = %i not found \n", key);
 	}
 
-	interator_init(hashTable);
+	interator_init_DA(&hashTable);
 	i = 0;
-	while (i < HASH_SIZE + 5) {
-		if ((next = iterator_next(hashTable)) != NULL) {
+	while (i < hashTable.size) {
+		if ((next = iterator_next_DA(&hashTable)) != NULL) {
 			printf("Key %i : Value = %i \n", next->key, next->value);
 		}
 		i++;
