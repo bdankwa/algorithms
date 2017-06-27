@@ -1,5 +1,5 @@
 #include "linkedList.h"
-#include "stdafx.h"
+#include "common.h"
 
 dlinkedList_t* init_dllist(void) {
 
@@ -34,7 +34,7 @@ int insert_dllist(dlinkedList_t* list, int key, int value) {
 		*******************************************/		
 		node_t* next = list->head;
 		while (next != NULL) {
-			if (next->key >= key) {
+			if (next->key >= key) { // find the location to insert
 				if (list->head->key >= key) {//less than head
 					list->head = new_node;
 				}
@@ -42,9 +42,9 @@ int insert_dllist(dlinkedList_t* list, int key, int value) {
 					new_node->prev = next->prev;
 					next->prev->next = new_node;
 				}
-				else { // skip the head if multiple nodes exist
+				else { 
 					;
-				}
+				}//Add the rest of the list to the new node
 				new_node->next = next;
 				next->prev = new_node;
 				list->size++;

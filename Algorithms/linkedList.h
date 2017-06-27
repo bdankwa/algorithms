@@ -1,11 +1,5 @@
 #pragma once
-
-typedef struct node {/***NOTE THE DEFINITION***********/
-	int key;
-	int value;
-	struct node* next;
-	struct node* prev;
-}node_t;
+#include "common.h"
 
 typedef struct dlist {
 	node_t* head;

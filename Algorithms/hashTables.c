@@ -1,5 +1,4 @@
 #include "hashTables.h"
-#include "stdafx.h"
 
 unsigned int new_size = HASH_SIZE;
 
